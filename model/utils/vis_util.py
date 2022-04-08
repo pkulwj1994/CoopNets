@@ -54,11 +54,18 @@ class Visualizer():
     def draw_figure(self):
         plt.figure(self.fig.number)
 
-        plt.plot(self.loss_vals.keys(), self.loss_vals.values(), 'r-', alpha = self.alpha)
-        if self.show_avg:
-            plt.plot(self.sma.keys(), self.sma.values(), 'r-')
+        try:
+            plt.plot(self.loss_vals.keys(), self.loss_vals.values(), 'r-', alpha = self.alpha)
+            if self.show_avg:
+                plt.plot(self.sma.keys(), self.sma.values(), 'r-')
 
-        plt.draw()
+            plt.draw()
+        except:
+            plt.plot(list(self.loss_vals.keys()), list(self.loss_vals.values()), 'r-', alpha = self.alpha)
+            if self.show_avg:
+                plt.plot(list(self.sma.keys()), list(self.sma.values()), 'r-')
+
+            plt.draw()
 
         if self.save_figpath != None:
             self.fig.savefig(self.save_figpath, bbox_inches='tight')
